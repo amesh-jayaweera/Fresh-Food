@@ -1,8 +1,9 @@
-package com.syscolabs.freshfoods.entity;
+package com.example.freshfoods.entity;
 
 import lombok.*;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "food")
@@ -18,7 +19,7 @@ public class Food {
     @Column(unique = true, nullable = false)
     private String name;
     private int qty;
-    private double price;
+    private BigDecimal price;
     @Column(nullable = false)
     private String imageUrl;
 

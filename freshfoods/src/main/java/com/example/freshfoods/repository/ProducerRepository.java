@@ -1,6 +1,6 @@
-package com.syscolabs.freshfoods.repository;
+package com.example.freshfoods.repository;
 
-import com.syscolabs.freshfoods.entity.Producer;
+import com.example.freshfoods.entity.Producer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

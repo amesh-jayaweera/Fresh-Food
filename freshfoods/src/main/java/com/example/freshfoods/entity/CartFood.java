@@ -1,4 +1,4 @@
-package com.syscolabs.freshfoods.entity;
+package com.example.freshfoods.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -6,32 +6,34 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
+import java.math.BigDecimal;
 
 @Entity
-@Table(name = "cart")
+@Table(name = "cart_product")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cart {
+public class CartFood {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private double price;
+    private int qty;
+    private BigDecimal price;
 
     @ManyToOne(
-            targetEntity = User.class,
+            targetEntity = Cart.class,
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             optional = false
     )
-    private User user;
+    private Cart cart;
 
-    @OneToMany(
-            targetEntity = CartFood.class,
-            mappedBy = "cart",
-            fetch = FetchType.EAGER
+    @ManyToOne(
+            targetEntity = Food.class,
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            optional = false
     )
-    private List<CartFood> foods;
+    private Food food;
 }

@@ -1,4 +1,4 @@
-package com.syscolabs.freshfoods.entity;
+package com.example.freshfoods.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
