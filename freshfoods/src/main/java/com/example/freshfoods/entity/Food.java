@@ -1,25 +1,27 @@
 package com.example.freshfoods.entity;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "food")
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
-@AllArgsConstructor
 public class Food {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(unique = true, nullable = false)
+
+    @Column(nullable = false)
     private String name;
-    private int qty;
+
     private BigDecimal price;
+
     @Column(nullable = false)
     private String imageUrl;
 
@@ -38,4 +40,10 @@ public class Food {
             optional = false
     )
     private Producer producer;
+
+    public Food(String name, BigDecimal price, String imageUrl) {
+        this.name = name;
+        this.price = price;
+        this.imageUrl = imageUrl;
+    }
 }

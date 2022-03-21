@@ -1,9 +1,16 @@
 package com.example.freshfoods.repository;
 
 import com.example.freshfoods.entity.Food;
+import com.example.freshfoods.entity.FoodCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Optional;
+
 @Repository
 public interface FoodRepository extends JpaRepository<Food, Long> {
+    List<Food> findAllByCategory(FoodCategory category);
+    List<Food> findAllByNameContains(String name);
+    Optional<Food> findFoodByName(String name);
 }

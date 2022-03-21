@@ -1,8 +1,6 @@
 package com.example.freshfoods.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -10,15 +8,13 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
-@Table(name = "cart")
-@Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private BigDecimal price;
 
     @ManyToOne(
