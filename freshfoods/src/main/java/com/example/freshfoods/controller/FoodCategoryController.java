@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/food-category")
+@RequestMapping(value = "/api/v1/food-category")
 public class FoodCategoryController {
 
     private final FoodCategoryService foodCategoryService;

@@ -1,7 +1,6 @@
 package com.example.freshfoods.controller;
 
 import com.example.freshfoods.entity.FoodCategory;
-import com.example.freshfoods.model.CreateFoodDTO;
 import com.example.freshfoods.model.ResponseDTO;
 import com.example.freshfoods.service.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +8,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @RestController
-@RequestMapping("/api/v1/food")
+@RequestMapping(value = "/api/v1/food")
 public class FoodController {
 
     private final FoodService foodService;
@@ -22,16 +20,6 @@ public class FoodController {
     @Autowired
     public FoodController(FoodService foodService) {
         this.foodService = foodService;
-    }
-
-    @PostMapping
-    public ResponseEntity<ResponseDTO<?>> create(@Valid @RequestBody CreateFoodDTO food) {
-        ResponseDTO<?> responseDTO = ResponseDTO.builder()
-                .statusCode(HttpStatus.CREATED.value())
-                .status(HttpStatus.CREATED.toString())
-                .body(foodService.save(food)).build();
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
     }
 
     @GetMapping
