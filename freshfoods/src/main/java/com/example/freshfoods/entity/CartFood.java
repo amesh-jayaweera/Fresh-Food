@@ -1,14 +1,15 @@
 package com.example.freshfoods.entity;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 
 @Entity
 @Setter
 @Getter
+@NoArgsConstructor
 public class CartFood {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,11 +17,9 @@ public class CartFood {
 
     private int qty;
 
-    private BigDecimal price;
-
     @ManyToOne(
             targetEntity = Cart.class,
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.MERGE,
             fetch = FetchType.LAZY,
             optional = false
     )
@@ -28,9 +27,22 @@ public class CartFood {
 
     @ManyToOne(
             targetEntity = Food.class,
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.MERGE,
             fetch = FetchType.LAZY,
             optional = false
     )
     private Food food;
+
+    public CartFood(int qty, Cart cart, Food food) {
+        this.qty = qty;
+        this.cart = cart;
+        this.food = food;
+    }
+
+    public CartFood(long id, int qty, Cart cart, Food food) {
+        this.id = id;
+        this.qty = qty;
+        this.cart = cart;
+        this.food = food;
+    }
 }

@@ -34,7 +34,7 @@ public class APIExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.badRequest().body(responseDTO);
     }
 
-    @ExceptionHandler({ConstraintViolationException.class, BadRequestException.class})
+    @ExceptionHandler({ConstraintViolationException.class, BadRequestException.class, ResourceNotFoundException.class})
     public final ResponseEntity<Object> handleConstraintViolationException(Exception ex) {
         log.error(ex.getMessage(), ex);
 
@@ -44,11 +44,5 @@ public class APIExceptionHandler extends ResponseEntityExceptionHandler {
                 .message(ex.getMessage()).build();
 
         return ResponseEntity.badRequest().body(responseDTO);
-    }
-
-    @ExceptionHandler({ResourceNotFoundException.class})
-    public final ResponseEntity<Object> handleResourceNotFoundException(Exception ex) {
-        log.error(ex.getMessage(), ex);
-        return ResponseEntity.notFound().build();
     }
 }
