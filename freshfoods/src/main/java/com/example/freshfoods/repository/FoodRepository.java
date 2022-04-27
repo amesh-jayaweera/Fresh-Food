@@ -11,4 +11,5 @@ import java.util.List;
 public interface FoodRepository extends JpaRepository<Food, Long> {
     List<Food> findAllByCategory(FoodCategory category);
     List<Food> findAllByNameContains(String name);
+    List<Food> findAllByCategoryAndNameContains(FoodCategory category, String name);
 }

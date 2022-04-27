@@ -37,4 +37,26 @@ public class UserServiceImpl implements UserService {
         user.setRole(userRole);
         userRepository.save(user);
     }
+
+    @Override
+    public void updateProfile(SignupRequest signupRequest) {
+        Optional<User> userOptional = userRepository.findById(signupRequest.getId());
+        if(userOptional.isEmpty()) throw new BadRequestException("User not exists!");
+        User user = userOptional.get();
+        user.setName(signupRequest.getName());
+        user.setUsername(signupRequest.getUsername());
+        user.setPassword(passwordEncoder.encode(signupRequest.getPassword()));
+        Role userRole = roleRepository.findByRole(ERole.ROLE_USER)
+                .orElseThrow(() -> new RuntimeException("User Role is not found."));
+        user.setRole(userRole);
+        userRepository.save(user);
+    }
+
+    @Override
+    public SignupRequest getUser(Long id) {
+        Optional<User> userOptional = userRepository.findById(id);
+        if(userOptional.isEmpty()) throw new BadRequestException("User not exists!");
+        User user = userOptional.get();
+        return new SignupRequest(user.getId(), user.getUsername(), user.getName(), user.getPassword());
+    }
 }

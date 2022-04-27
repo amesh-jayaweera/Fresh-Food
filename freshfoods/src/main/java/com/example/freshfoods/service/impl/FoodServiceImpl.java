@@ -66,7 +66,9 @@ public class FoodServiceImpl implements FoodService {
 
     @Override
     public List<FoodDTO> get(FoodCategory category) {
-        return toDto(foodRepository.findAllByCategory(category));
+        if(foodCategoryRepository.findFoodCategoryByName(category.getName()).isPresent())
+            return toDto(foodRepository.findAllByCategory(category));
+        throw new BadRequestException("The given food category doesn't exists!");
     }
 
     @Override
@@ -89,8 +91,17 @@ public class FoodServiceImpl implements FoodService {
     }
 
     @Override
-    public List<FoodDTO> contains(String name) {
-        return toDto(foodRepository.findAllByNameContains(name));
+    public List<FoodDTO> contains(String category, String name) {
+        if(category.trim().isEmpty())
+            return toDto(foodRepository.findAllByNameContains(name));
+        else {
+            Optional<FoodCategory> foodCategoryOptional = foodCategoryRepository.findFoodCategoryByName(category);
+            if(foodCategoryOptional.isPresent()) {
+                FoodCategory foodCategory = foodCategoryOptional.get();
+                return toDto(foodRepository.findAllByCategoryAndNameContains(foodCategory, name.trim()));
+            }
+        }
+        return new ArrayList<>();
     }
 
     private List<FoodDTO> toDto(List<Food> foods) {

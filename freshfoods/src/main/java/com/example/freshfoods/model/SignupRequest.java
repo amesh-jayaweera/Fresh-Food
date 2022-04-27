@@ -13,6 +13,8 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 public class SignupRequest {
 
+    private Long id;
+
     @NotBlank(message = "{NotEmpty.username}")
     @Size(min = 6, max = 20, message = "{Size.username}")
     private String username;
@@ -23,4 +25,11 @@ public class SignupRequest {
     @NotBlank(message = "{NotEmpty.password}")
     @StrongPassword(message = "{Strong.password}")
     private String password;
+
+    public SignupRequest(Long id, String username, String name, String password) {
+        this.id = id;
+        this.username = username;
+        this.name = name;
+        this.password = password;
+    }
 }

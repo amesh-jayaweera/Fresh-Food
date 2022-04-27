@@ -11,5 +11,5 @@ public interface FoodService {
     List<FoodDTO> get();
     List<FoodDTO> get(FoodCategory category);
     FoodDTO get(Long id);
-    List<FoodDTO> contains(String name);
+    List<FoodDTO> contains(String category, String name);
 }

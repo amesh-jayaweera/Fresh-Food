@@ -6,7 +6,9 @@ import com.example.freshfoods.service.FoodCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class FoodCategoryServiceImpl implements FoodCategoryService {
@@ -19,7 +21,10 @@ public class FoodCategoryServiceImpl implements FoodCategoryService {
     }
 
     @Override
-    public List<FoodCategory> get() {
-        return foodCategoryRepository.findAll();
+    public Set<String> get() {
+        Set<String> categories = new HashSet<>();
+        for(FoodCategory foodCategory : foodCategoryRepository.findAll())
+            categories.add(foodCategory.getName());
+        return categories;
     }
 }

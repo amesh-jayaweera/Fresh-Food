@@ -1,10 +1,7 @@
 package com.example.freshfoods.service;
 
-import com.example.freshfoods.entity.FoodCategory;
-
-import java.util.List;
-import java.util.Optional;
+import java.util.Set;
 
 public interface FoodCategoryService {
-    List<FoodCategory> get();
+    Set<String> get();
 }

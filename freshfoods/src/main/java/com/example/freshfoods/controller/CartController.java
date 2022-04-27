@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
 
+@CrossOrigin(value = "*")
 @RestController
 @RequestMapping(value = "/api/v1/cart")
 public class CartController {
